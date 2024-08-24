@@ -3,10 +3,9 @@ package camilo.opertationquasarfire.Models;
 import lombok.Builder;
 import lombok.Getter;
 
-
 @Getter
 @Builder
-public class ErrorResponse {    
+public class ErrorResponse {
     private String message;
-    
+
 }

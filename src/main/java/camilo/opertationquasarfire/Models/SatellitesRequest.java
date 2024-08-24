@@ -6,5 +6,5 @@ import lombok.Getter;
 
 @Getter
 public class SatellitesRequest {
-    private List<SatelliteRequest> satellites;    
+    private List<SatelliteRequest> satellites;
 }

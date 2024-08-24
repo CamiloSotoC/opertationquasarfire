@@ -16,47 +16,44 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 @RestController
 public class Controller {
 
     @Autowired
-    ServiceIntf  service;
+    ServiceIntf service;
 
     @PostMapping("/topsecret")
     public ResponseEntity<SpaceshipResponse> postSatellites(
-        @RequestBody SatellitesRequest request) {
-            if(request.getSatellites() == null || request.getSatellites().size() < 3)
-                throw new ResquestException("There is not enough information");
-            return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(this.service.getSpaceshipData(request.getSatellites()));
+            @RequestBody SatellitesRequest request) {
+        if (request.getSatellites() == null || request.getSatellites().size() < 3)
+            throw new ResquestException("There is not enough information");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.service.getSpaceshipData(request.getSatellites()));
     }
-    
+
     @PostMapping("/topsecret_split/{satelliteName}")
     public ResponseEntity<List<Satellite>> postSatelliteData(
-        @PathVariable String satelliteName
-        ,@RequestBody SatelliteRequest request){        
+            @PathVariable String satelliteName, @RequestBody SatelliteRequest request) {
 
-            return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(this.service.setSatellite(satelliteName, request));
-               
-        
-    }
-    @GetMapping("/topsecret_split/")
-    public ResponseEntity<SpaceshipResponse> getSpaceshipData(){
         return ResponseEntity
-        .status(HttpStatus.OK)
-        .body(this.service.getSpaceshipData());
+                .status(HttpStatus.OK)
+                .body(this.service.setSatellite(satelliteName, request));
+
     }
-    
+
+    @GetMapping("/topsecret_split/")
+    public ResponseEntity<SpaceshipResponse> getSpaceshipData() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.service.getSpaceshipData());
+    }
 
     @GetMapping("/satellites")
-    public ResponseEntity<List<Satellite>> getSatellites(){
+    public ResponseEntity<List<Satellite>> getSatellites() {
         return ResponseEntity
-        .status(HttpStatus.OK)
-        .body(this.service.getSatellites());        
+                .status(HttpStatus.OK)
+                .body(this.service.getSatellites());
     }
-    
+
 }

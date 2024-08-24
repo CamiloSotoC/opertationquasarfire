@@ -9,5 +9,5 @@ public class SpaceshipResponse {
 
     private Position position;
     private String message;
-    
+
 }

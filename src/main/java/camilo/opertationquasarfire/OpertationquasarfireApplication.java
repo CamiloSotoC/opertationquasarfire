@@ -17,9 +17,8 @@ public class OpertationquasarfireApplication {
 	@Bean
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
-		.info(new Info()
-		.title("Operation Quasar Fire - API")
-		.description("API Operation Quasar Fire")
-		);
+				.info(new Info()
+						.title("Operation Quasar Fire - API")
+						.description("API Operation Quasar Fire"));
 	}
 }

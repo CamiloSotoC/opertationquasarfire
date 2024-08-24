@@ -15,10 +15,10 @@ public class SatelliteRequest {
     private String name;
     private Double distance;
     private List<String> message;
-    
+
     public SatelliteRequest(Double distance, List<String> message) {
         this.distance = distance;
         this.message = message;
     }
-    
+
 }

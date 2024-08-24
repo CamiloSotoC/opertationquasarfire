@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 public class Satellite {
-    
-    private String name;    
+
+    private String name;
     private Position position;
     private Double distance;
     private List<String> message;
@@ -24,5 +24,5 @@ public class Satellite {
     public void setMessage(List<String> message) {
         this.message = message;
     }
-    
+
 }
