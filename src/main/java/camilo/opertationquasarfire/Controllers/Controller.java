@@ -1,7 +1,6 @@
 package camilo.opertationquasarfire.Controllers;
 
 import org.springframework.web.bind.annotation.RestController;
-import camilo.opertationquasarfire.Exceptions.ResquestException;
 import camilo.opertationquasarfire.Models.Satellite;
 import camilo.opertationquasarfire.Models.SatelliteRequest;
 import camilo.opertationquasarfire.Models.SatellitesRequest;
@@ -25,8 +24,6 @@ public class Controller {
     @PostMapping("/topsecret")
     public ResponseEntity<SpaceshipResponse> postSatellites(
             @RequestBody SatellitesRequest request) {
-        if (request.getSatellites() == null || request.getSatellites().size() < 3)
-            throw new ResquestException("There is not enough information");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.service.getSpaceshipData(request.getSatellites()));

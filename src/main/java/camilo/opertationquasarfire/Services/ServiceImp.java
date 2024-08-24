@@ -10,6 +10,7 @@ import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
 import com.lemmingapex.trilateration.TrilaterationFunction;
 
 import camilo.opertationquasarfire.Exceptions.InformationException;
+import camilo.opertationquasarfire.Exceptions.ResquestException;
 import camilo.opertationquasarfire.Models.Position;
 import camilo.opertationquasarfire.Models.Satellite;
 import camilo.opertationquasarfire.Models.SatelliteRequest;
@@ -62,24 +63,31 @@ public class ServiceImp implements ServiceIntf {
 
     @Override
     public SpaceshipResponse getSpaceshipData(List<SatelliteRequest> satellitesRequest) {
+        if (satellitesRequest == null || satellitesRequest.size() < 3)
+            throw new ResquestException("There is not enough information from satellites.");
         for (SatelliteRequest sRequest : satellitesRequest) {
+            if (sRequest == null || sRequest.getName() == null)
+                throw new ResquestException("There is not enough information from satellites.");
             Satellite satellite = this.repository.getSatelliteByName(sRequest.getName());
             if (satellite == null)
-                throw new InformationException("That satellite does not exist: '" + sRequest.getName() + "'.");
+                throw new ResquestException("That satellite does not exist: '" + sRequest.getName() + "'.");
+            if (sRequest.getDistance() == null || sRequest.getMessage() == null)
+                throw new ResquestException(
+                        "There is not enough information from satellite:" + sRequest.getName() + "'.");
             satellite.setDistance(sRequest.getDistance());
             satellite.setMessage(sRequest.getMessage());
         }
         SpaceshipResponse spaceshipData = new SpaceshipResponse(
-                this.getLocation(this.repository.getDistances()), this.getMessage(this.repository.getMessages()));
+                this.getLocation(this.repository.getDistances()),
+                this.getMessage(this.repository.getMessages()));
 
         return spaceshipData;
     }
 
     public SpaceshipResponse getSpaceshipData() throws RuntimeException {
         List<Satellite> satellites = this.repository.getSatellites();
-        if (satellites == null || satellites.size() < 3) {
+        if (satellites == null || satellites.size() < 3)
             throw new InformationException("There is not enough information from satellites.");
-        }
         for (Satellite s : satellites) {
             if (s.getDistance() == null || s.getMessage() == null) {
                 throw new InformationException("There is a satellite without information.");
@@ -87,7 +95,8 @@ public class ServiceImp implements ServiceIntf {
         }
 
         SpaceshipResponse spaceshipData = new SpaceshipResponse(
-                this.getLocation(this.repository.getDistances()), this.getMessage(this.repository.getMessages()));
+                this.getLocation(this.repository.getDistances()),
+                this.getMessage(this.repository.getMessages()));
         return spaceshipData;
     }
 
