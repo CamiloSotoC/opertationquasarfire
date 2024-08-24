@@ -31,7 +31,7 @@ public class ControllerAdvice {
 
   @ExceptionHandler(value = HttpMessageNotReadableException.class)
   public ResponseEntity<ErrorResponse> HttpMessageNotReadableExceptionHandler(HttpMessageNotReadableException e) {
-    ErrorResponse error = ErrorResponse.builder().message("Required request body is missing.").build();
+    ErrorResponse error = ErrorResponse.builder().message("Required request body is wrong or missing.").build();
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
   }
 
