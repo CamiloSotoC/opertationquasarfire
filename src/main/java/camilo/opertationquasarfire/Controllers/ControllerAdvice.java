@@ -26,8 +26,6 @@ public class ControllerAdvice {
   @ExceptionHandler(value = InformationException.class)
   public ResponseEntity<ErrorResponse> InformationExceptionHandler(InformationException e) {
     ErrorResponse error = ErrorResponse.builder().message(e.getMessage()).build();
-    // ErrorResponse error = ErrorResponse.builder().message("There is not enough
-    // information.").build();
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
   }
 
@@ -39,14 +37,14 @@ public class ControllerAdvice {
 
   @ExceptionHandler(value = NoResourceFoundException.class)
   public ResponseEntity<ErrorResponse> NoResourceFoundExceptionHandler(NoResourceFoundException e) {
-    ErrorResponse error = ErrorResponse.builder().message("The request url was not not found.").build();
+    ErrorResponse error = ErrorResponse.builder().message("The request url was not found.").build();
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
   }
 
   @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
   public ResponseEntity<ErrorResponse> HttpRequestMethodNotSupportedExceptionHandler(
       HttpRequestMethodNotSupportedException e) {
-    ErrorResponse error = ErrorResponse.builder().message("The request url was not not found.").build();
+    ErrorResponse error = ErrorResponse.builder().message("The request url was not found.").build();
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
   }
 }
