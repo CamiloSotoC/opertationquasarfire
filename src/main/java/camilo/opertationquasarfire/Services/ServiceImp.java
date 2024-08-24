@@ -2,6 +2,8 @@ package camilo.opertationquasarfire.Services;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
 import org.apache.commons.math3.linear.RealVector;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,16 +51,20 @@ public class ServiceImp implements ServiceIntf {
     @Override
     public String getMessage(List<List<String>> messages) {
         int numWords = messages.get(0).size();
-        List<String> messageList = Arrays.asList(new String[numWords]);
+        for (List<String> m : messages) {
+            if (m.size() != numWords)
+                throw new ResquestException("The number of words in each message is not the same");
+        }
+        List<String> finalMessage = new ArrayList<>();
         for (int i = 0; i < numWords; i++) {
-            for (int j = 0; j < messages.size(); j++) {
-                if (!messages.get(j).get(i).isEmpty()) {
-                    messageList.set(i, messages.get(j).get(i));
+            for(List<String> m: messages){
+                if (!m.get(i).isEmpty()) {
+                    finalMessage.set(i, m.get(i));
                     break;
                 }
             }
         }
-        return String.join(" ", messageList);
+        return String.join(" ", finalMessage);
     }
 
     @Override
@@ -93,7 +99,6 @@ public class ServiceImp implements ServiceIntf {
                 throw new InformationException("There is a satellite without information.");
             }
         }
-
         SpaceshipResponse spaceshipData = new SpaceshipResponse(
                 this.getLocation(this.repository.getDistances()),
                 this.getMessage(this.repository.getMessages()));
@@ -105,10 +110,11 @@ public class ServiceImp implements ServiceIntf {
         Satellite satellite = this.repository.getSatelliteByName(name);
         if (satellite == null)
             throw new InformationException("That satellite does not exist: '" + name + "'.");
+        if (request.getMessage().size() != satellite.getMessage().size())
+            throw new ResquestException("The number of words in each message is not the same");
         satellite.setDistance(request.getDistance());
         satellite.setMessage(request.getMessage());
         return this.repository.getSatellites();
-
     }
 
 }
