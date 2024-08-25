@@ -11,6 +11,11 @@ The goal is to create a program that returns the location and rebuild the distre
 * Trilateration 1.0.2 (https://github.com/lemmingapex/trilateration)
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
 
+## Deployed
+* The application is deployed in Railway:
+
+[https://opertationquasarfire-production.up.railway.app/satellites]
+
 ## Getting Started
 
 ### Configuration
@@ -41,7 +46,11 @@ mvn spring-boot:run
 ```
 ### How to Use the  API
 * To send satellite data and get the location and message of the spaceship.
-Sends satellite data with an HTTP POST request to url_server/topsecret/ with a JSON payload like the following:
+Sends satellite data with an HTTP POST request to:
+```
+url_server/topsecret/
+```
+With a JSON payload like the following:
 ```json
 {
   "satellites": [
@@ -78,14 +87,22 @@ If the position or message cannot be determined, it returns:
 RESPONSE CODE: 404
 ```
 * To set one satellite data 
-Sends one satellite data to update it. Send an HTTP POST request to url_server/topsecret_split/{satellite_name} with a JSON payload like the following:
+Sends one satellite data to update it. Send an HTTP POST request to:
+```
+url_server/topsecret_split/{satellite_name}
+```
+With a JSON payload like the following:
 ```json
 {
   "distance":150,
   "message": ["", "", "un", "mensaje"]
 }
 ```
-The response will be a JSON with update data of satellites. Consider 'satellite name' as 'kenobi', where satellite kenobi is updated, as in the following example:
+The response will be a JSON with update data of satellites. For the following response example consider the POST request:
+```
+url_server/topsecret_split/kenobi
+```
+Where satellite 'kenobi' is updated:
 ```json
 [
   {
@@ -109,7 +126,10 @@ The response will be a JSON with update data of satellites. Consider 'satellite 
 ]
 ```
 * To get the location and message of the spaceship.
-Send an HTTP GET request to url_server/topsecret_split/.
+Send an HTTP GET request to:
+```
+url_server/topsecret_split/
+```
 The response will be a JSON with the position and message of the emitter.
 ```json
 {
@@ -119,4 +139,37 @@ The response will be a JSON with the position and message of the emitter.
   },
   "message": "este es un mensaje secreto"
 }
+```
+* To get all satellite data
+Send an HTTP GET request to:
+```
+url_server/satellites/
+```
+The response will be a JSON with all the satellite data, for the following response example consider that the application has not been updated with the spaceship data.
+```json
+[
+  {
+    "name": "Kenobi",
+    "position": {"x": -500.0, "y": -200.0},
+    "distance": null,
+    "message": null
+  },
+  {
+    "name": "Skywalker",
+    "position": {"x": 100.0, "y": -100.0},
+    "distance": null,
+    "message": null
+  },
+  {
+    "name": "Sato",
+    "position": {"x": 500.0, "y": 100.0},
+    "distance": null,
+    "message": null
+  }
+]
+```
+### Swagger UI
+* For more documentation and testing you can access swagger-ui:
+```
+url_server/swagger-ui/index.html
 ```
