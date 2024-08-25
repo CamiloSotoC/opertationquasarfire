@@ -1,16 +1,12 @@
 package camilo.opertationquasarfire.Services;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
 import org.apache.commons.math3.linear.RealVector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
 import com.lemmingapex.trilateration.TrilaterationFunction;
-
 import camilo.opertationquasarfire.Exceptions.InformationException;
 import camilo.opertationquasarfire.Exceptions.ResquestException;
 import camilo.opertationquasarfire.Models.Position;
@@ -18,6 +14,7 @@ import camilo.opertationquasarfire.Models.Satellite;
 import camilo.opertationquasarfire.Models.SatelliteRequest;
 import camilo.opertationquasarfire.Models.SpaceshipResponse;
 import camilo.opertationquasarfire.Repositories.Repository;
+import camilo.opertationquasarfire.Utils.UtilRebuilMessage;
 
 @Service
 public class ServiceImp implements ServiceIntf {
@@ -50,21 +47,7 @@ public class ServiceImp implements ServiceIntf {
 
     @Override
     public String getMessage(List<List<String>> messages) {
-        int numWords = messages.get(0).size();
-        for (List<String> m : messages) {
-            if (m.size() != numWords)
-                throw new ResquestException("The number of words in each message is not the same");
-        }
-        List<String> finalMessage = new ArrayList<>();
-        for (int i = 0; i < numWords; i++) {
-            for(List<String> m: messages){
-                if (!m.get(i).isEmpty()) {
-                    finalMessage.set(i, m.get(i));
-                    break;
-                }
-            }
-        }
-        return String.join(" ", finalMessage);
+        return UtilRebuilMessage.rebuilMessage(messages);
     }
 
     @Override
@@ -110,8 +93,6 @@ public class ServiceImp implements ServiceIntf {
         Satellite satellite = this.repository.getSatelliteByName(name);
         if (satellite == null)
             throw new InformationException("That satellite does not exist: '" + name + "'.");
-        if (request.getMessage().size() != satellite.getMessage().size())
-            throw new ResquestException("The number of words in each message is not the same");
         satellite.setDistance(request.getDistance());
         satellite.setMessage(request.getMessage());
         return this.repository.getSatellites();
