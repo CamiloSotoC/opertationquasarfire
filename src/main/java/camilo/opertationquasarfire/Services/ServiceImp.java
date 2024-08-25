@@ -53,16 +53,16 @@ public class ServiceImp implements ServiceIntf {
     @Override
     public SpaceshipResponse getSpaceshipData(List<SatelliteRequest> satellitesRequest) {
         if (satellitesRequest == null || satellitesRequest.size() < 3)
-            throw new ResquestException("There is not enough information from satellites.");
+            throw new ResquestException("RQE1","There is not enough information from satellites.");
         for (SatelliteRequest sRequest : satellitesRequest) {
             if (sRequest == null || sRequest.getName() == null)
-                throw new ResquestException("There is not enough information from satellites.");
+                throw new ResquestException("RQE2","There is not enough information from satellites.");
             Satellite satellite = this.repository.getSatelliteByName(sRequest.getName());
             if (satellite == null)
-                throw new ResquestException("That satellite does not exist: '" + sRequest.getName() + "'.");
+                throw new ResquestException("RQE3","That satellite does not exist: '" + sRequest.getName() + "'.");
             if (sRequest.getDistance() == null || sRequest.getMessage() == null)
-                throw new ResquestException(
-                        "There is not enough information from satellite:" + sRequest.getName() + "'.");
+                throw new ResquestException("RQE4",
+                        "There is not enough information from satellite: '" + sRequest.getName() + "'.");
             satellite.setDistance(sRequest.getDistance());
             satellite.setMessage(sRequest.getMessage());
         }
@@ -76,10 +76,10 @@ public class ServiceImp implements ServiceIntf {
     public SpaceshipResponse getSpaceshipData() throws RuntimeException {
         List<Satellite> satellites = this.repository.getSatellites();
         if (satellites == null || satellites.size() < 3)
-            throw new InformationException("There is not enough information from satellites.");
+            throw new InformationException("INE1","There is not enough information from satellites.");
         for (Satellite s : satellites) {
             if (s.getDistance() == null || s.getMessage() == null) {
-                throw new InformationException("There is a satellite without information.");
+                throw new InformationException("INE2","There is not enough information from satellite: '" + s.getName() + "'.");
             }
         }
         SpaceshipResponse spaceshipData = new SpaceshipResponse(
@@ -92,7 +92,7 @@ public class ServiceImp implements ServiceIntf {
     public Satellite setSatellite(String name, SatelliteRequest request) {
         Satellite satellite = this.repository.getSatelliteByName(name);
         if (satellite == null)
-            throw new InformationException("That satellite does not exist: '" + name + "'.");
+            throw new InformationException("INE3","That satellite does not exist: '" + name + "'.");
         satellite.setDistance(request.getDistance());
         satellite.setMessage(request.getMessage());
         return satellite;
