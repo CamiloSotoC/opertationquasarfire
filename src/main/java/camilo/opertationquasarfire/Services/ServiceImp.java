@@ -89,13 +89,13 @@ public class ServiceImp implements ServiceIntf {
     }
 
     @Override
-    public List<Satellite> setSatellite(String name, SatelliteRequest request) {
+    public Satellite setSatellite(String name, SatelliteRequest request) {
         Satellite satellite = this.repository.getSatelliteByName(name);
         if (satellite == null)
             throw new InformationException("That satellite does not exist: '" + name + "'.");
         satellite.setDistance(request.getDistance());
         satellite.setMessage(request.getMessage());
-        return this.repository.getSatellites();
+        return satellite;
     }
 
 }

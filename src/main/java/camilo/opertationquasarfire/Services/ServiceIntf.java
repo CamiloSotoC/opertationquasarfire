@@ -19,6 +19,6 @@ public interface ServiceIntf {
 
     SpaceshipResponse getSpaceshipData();
 
-    List<Satellite> setSatellite(String name, SatelliteRequest request);
+    Satellite setSatellite(String name, SatelliteRequest request);
 
 }
