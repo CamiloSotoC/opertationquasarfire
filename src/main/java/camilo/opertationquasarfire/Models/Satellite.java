@@ -2,9 +2,11 @@ package camilo.opertationquasarfire.Models;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class Satellite {
 
     private String name;
