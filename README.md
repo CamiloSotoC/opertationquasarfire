@@ -35,12 +35,13 @@ satellite.satoX=500
 satellite.satoY=100
 ```
 ### Executing program
-Run the Spring Boot application with the following command:
+To run the application run the following command in the root of the project:
 ```
 mvn spring-boot:run
 ```
 ### How to Use the  API
-* Send satellite data and get the location and message of the spaceship. Send an HTTP POST request to url_server/topsecret/ with a JSON payload like the following:
+* To send satellite data and get the location and message of the spaceship.
+Sends satellite data with an HTTP POST request to url_server/topsecret/ with a JSON payload like the following:
 ```json
 {
   "satellites": [
@@ -62,7 +63,7 @@ mvn spring-boot:run
   ]
 }
 ```
-* The response will be a JSON with the position and message of the emitter.
+The response will be a JSON with the position and message of the emitter.
 ```json
 {
   "position": {
@@ -76,14 +77,15 @@ If the position or message cannot be determined, it returns:
 ```
 RESPONSE CODE: 404
 ```
-* Sends data from a satellite to update it. Send an HTTP POST request to url_server/topsecret_split/{satellite_name} with a JSON payload like the following(consider 'satellite_name' was 'kenobi'):
+* To set one satellite data 
+Sends one satellite data to update it. Send an HTTP POST request to url_server/topsecret_split/{satellite_name} with a JSON payload like the following:
 ```json
 {
   "distance":150,
   "message": ["", "", "un", "mensaje"]
 }
 ```
-The response will be a JSON with update data of satellites. Consider 'satellite name' as 'kenobi', where satellite kenobi is upgraded, for example the following:
+The response will be a JSON with update data of satellites. Consider 'satellite name' as 'kenobi', where satellite kenobi is updated, as in the following example:
 ```json
 [
   {
@@ -105,4 +107,16 @@ The response will be a JSON with update data of satellites. Consider 'satellite 
     "message": ["este", "", "un", "", ""]
   }
 ]
+```
+* To get the location and message of the spaceship.
+Send an HTTP GET request to url_server/topsecret_split/.
+The response will be a JSON with the position and message of the emitter.
+```json
+{
+  "position": {
+    "x": -58.315252587138595,
+    "y": -69.55141837312165
+  },
+  "message": "este es un mensaje secreto"
+}
 ```
