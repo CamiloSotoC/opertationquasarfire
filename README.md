@@ -42,8 +42,9 @@ satellite.satoY=100
 ### Executing program
 To run the application run the following command in the root of the project `mvn spring-boot:run`6
 
-### How to Use the  API
-1. To send satellite data and get the location and message of the spaceship.
+## How to Use the  API
+### 1° Enpoint
+To send satellite data and get the location and message of the spaceship.
 Sends satellite data with an HTTP POST request to:
 ```
 url_server/topsecret/
@@ -70,7 +71,7 @@ With a JSON payload like the following:
   ]
 }
 ```
-The response will be a JSON with the position and message of the emitter.
+The response will be a JSON with the position and message of the spaceship.
 ```json
 {
   "position": {
@@ -80,7 +81,8 @@ The response will be a JSON with the position and message of the emitter.
   "message": "este es un mensaje secreto"
 }
 ```
-2. To set one satellite data 
+### 2° Enpoint 
+To set one satellite data 
 Sends one satellite data to update it. Send an HTTP POST request to:
 ```
 url_server/topsecret_split/{satellite_name}
@@ -105,7 +107,8 @@ Where satellite 'kenobi' is updated:
     "message": ["", "", "un", "mensaje"]
 }
 ```
-3. To get the location and message of the spaceship.
+### 3° Enpoint
+To get the location and message of the spaceship.
 Send an HTTP GET request to:
 ```
 url_server/topsecret_split/
@@ -120,7 +123,8 @@ The response will be a JSON with the position and message of the emitter.
   "message": "este es un mensaje secreto"
 }
 ```
-4. To get all satellite data
+### 4° Enpoint
+To get all satellite data
 Send an HTTP GET request to:
 ```
 url_server/satellites/
