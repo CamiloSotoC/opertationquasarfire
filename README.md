@@ -12,8 +12,7 @@ The goal is to create a program that returns the location and rebuild the distre
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
 
 ## Deployed
-* The application is deployed in Railway:
-
+The application is deployed in Railway:
 [https://opertationquasarfire-production.up.railway.app/satellites]
 
 ## Getting Started
@@ -23,12 +22,13 @@ The application will run by default on port 8080, you can modify it in the appli
 ```
 server.port=8080
 ```
-The name and location of the satellites are already configured:
 #### Satellite Data:
-* Kenobi: [-500, -200]
-* Skywalker: [100, -100]
-* Sato: [500, 100]
-
+The name and location of the satellites are already configured:
+```
+Kenobi: [-500, -200]
+Skywalker: [100, -100]
+Sato: [500, 100]
+```
 If you need to modify this information you can edit the application.properties variables:
 ```
 #Satellite Data
@@ -40,12 +40,10 @@ satellite.satoX=500
 satellite.satoY=100
 ```
 ### Executing program
-To run the application run the following command in the root of the project:
-```
-mvn spring-boot:run
-```
+To run the application run the following command in the root of the project `mvn spring-boot:run`6
+
 ### How to Use the  API
-* To send satellite data and get the location and message of the spaceship.
+1. To send satellite data and get the location and message of the spaceship.
 Sends satellite data with an HTTP POST request to:
 ```
 url_server/topsecret/
@@ -82,11 +80,7 @@ The response will be a JSON with the position and message of the emitter.
   "message": "este es un mensaje secreto"
 }
 ```
-If the position or message cannot be determined, it returns:
-```
-RESPONSE CODE: 404
-```
-* To set one satellite data 
+2. To set one satellite data 
 Sends one satellite data to update it. Send an HTTP POST request to:
 ```
 url_server/topsecret_split/{satellite_name}
@@ -98,34 +92,20 @@ With a JSON payload like the following:
   "message": ["", "", "un", "mensaje"]
 }
 ```
-The response will be a JSON with update data of satellites. For the following response example consider the POST request:
+The response will be a JSON with updated satellite data. For the following response example consider the POST request:
 ```
 url_server/topsecret_split/kenobi
 ```
 Where satellite 'kenobi' is updated:
 ```json
-[
-  {
+{
     "name": "Kenobi",
     "position": {"x": -500.0, "y": -200.0},
     "distance": 150.0,
     "message": ["", "", "un", "mensaje"]
-  },
-  {
-    "name": "Skywalker",
-    "position": {"x": 100.0, "y": -100.0},
-    "distance": 115.5,
-    "message": ["", "es", "", "", "secreto"]
-  },
-  {
-    "name": "Sato",
-    "position": {"x": 500.0, "y": 100.0},
-    "distance": 142.7,
-    "message": ["este", "", "un", "", ""]
-  }
-]
+}
 ```
-* To get the location and message of the spaceship.
+3. To get the location and message of the spaceship.
 Send an HTTP GET request to:
 ```
 url_server/topsecret_split/
@@ -140,7 +120,7 @@ The response will be a JSON with the position and message of the emitter.
   "message": "este es un mensaje secreto"
 }
 ```
-* To get all satellite data
+4. To get all satellite data
 Send an HTTP GET request to:
 ```
 url_server/satellites/
@@ -168,8 +148,9 @@ The response will be a JSON with all the satellite data, for the following respo
   }
 ]
 ```
-### Swagger UI
-* For more documentation and testing you can access swagger-ui:
+## Documentation & Testing - Swagger UI
+For more documentation and testing you can access swagger-ui:
 ```
 url_server/swagger-ui/index.html
 ```
+[https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html]
