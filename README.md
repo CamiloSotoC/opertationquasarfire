@@ -1,4 +1,5 @@
 # Springboot - API - Opertation Quasar Fire 🚀
+[![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE)
 This repository contains the implementation of the "Operation Quasar Fire" challenge in Java with SpringBoot.
 The goal is to create a program that returns the location and rebuild the distress message of an Imperial cargo ship adrift in an asteroid field.
 
