@@ -13,7 +13,7 @@ The goal is to create a program that returns the location and rebuild the distre
 
 ## Deployed
 The application is deployed in Railway:
-[https://opertationquasarfire-production.up.railway.app/satellites]
+[https://opertationquasarfire-production.up.railway.app/satellites/]
 
 ## Getting Started
 
