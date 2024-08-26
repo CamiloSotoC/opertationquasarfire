@@ -1,16 +1,16 @@
-package camilo.opertationquasarfire.Controllers;
+package camilo.opertationquasarfire.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
-import camilo.opertationquasarfire.Models.Satellite;
-import camilo.opertationquasarfire.Models.SatelliteRequest;
-import camilo.opertationquasarfire.Models.SatellitesRequest;
-import camilo.opertationquasarfire.Models.SpaceshipResponse;
-import camilo.opertationquasarfire.Services.ServiceIntf;
+
+import camilo.opertationquasarfire.models.Satellite;
+import camilo.opertationquasarfire.models.SatelliteRequest;
+import camilo.opertationquasarfire.models.SatellitesRequest;
+import camilo.opertationquasarfire.models.SpaceshipResponse;
+import camilo.opertationquasarfire.services.ServiceIntf;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,11 @@ public class Controller {
     /**
      * The service interface for the controller.
      */
-    @Autowired
-    ServiceIntf service;
+    private final ServiceIntf service;
+
+    Controller(ServiceIntf service) {
+        this.service = service;
+    }
 
     /**
      * Handles the POST request to retrieve spaceship information from a list of satellite data
