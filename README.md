@@ -24,7 +24,7 @@ To rebuild the message, the following steps are performed:
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
 
 ## ☁️ Deployed
-The application is deployed in Railway: [✅](https://opertationquasarfire-production.up.railway.app)👆
+The application is deployed in Railway: [https://opertationquasarfire-production.up.railway.app](https://opertationquasarfire-production.up.railway.app)👆
 
 ## ⚙️ Configuration
 ### Port:
@@ -168,4 +168,4 @@ For more documentation and testing you can access swagger-ui:
 GET /swagger-ui/index.html
 ```
 Url to the application deployed:
-[https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html]👆
+[https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html](https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html)👆
