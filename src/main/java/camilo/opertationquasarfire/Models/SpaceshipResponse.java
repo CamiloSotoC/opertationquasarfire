@@ -1,4 +1,4 @@
-package camilo.opertationquasarfire.Models;
+package camilo.opertationquasarfire.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package camilo.opertationquasarfire.Models;
+package camilo.opertationquasarfire.models;
 
 import java.util.List;
 import lombok.Getter;
