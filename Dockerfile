@@ -1,12 +1,15 @@
-FROM maven:3.8.2-jdk-17-slim
+#
+# Build stage
+#
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
 
-RUN mvn install
-
-WORKDIR /app
-
-COPY target/opertationquasarfire-0.0.1-SNAPSHOT.jar /app/app.jar
-
-EXPOSE 3000
-
-
-CMD [ "java", "-jar", "/app/app.jar" ]
+#
+# Package stage
+#
+FROM openjdk:17-jre-slim
+COPY --from=build /home/app/target/opertationquasarfire-0.0.1-SNAPSHOT.jar /usr/local/lib/demo.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
