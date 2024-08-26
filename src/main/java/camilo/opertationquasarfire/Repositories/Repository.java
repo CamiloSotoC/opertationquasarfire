@@ -1,11 +1,12 @@
-package camilo.opertationquasarfire.Repositories;
+package camilo.opertationquasarfire.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import camilo.opertationquasarfire.Models.Position;
-import camilo.opertationquasarfire.Models.Satellite;
+
+import camilo.opertationquasarfire.models.Position;
+import camilo.opertationquasarfire.models.Satellite;
 import jakarta.annotation.PostConstruct;
 
 @Component
@@ -32,6 +33,18 @@ public class Repository {
         satellites.add(new Satellite("Skywalker", new Position(skywalkerX, skywalkerY)));
         satellites.add(new Satellite("Sato", new Position(satoX, satoY)));
     }
+    
+
+    public void setAll(double kenobiX, double kenobiY, double skywalkerX, double skywalkerY, double satoX,
+            double satoY) {
+        this.kenobiX = kenobiX;
+        this.kenobiY = kenobiY;
+        this.skywalkerX = skywalkerX;
+        this.skywalkerY = skywalkerY;
+        this.satoX = satoX;
+        this.satoY = satoY;
+    }
+
 
     public List<Satellite> getSatellites() {        
         return satellites;
