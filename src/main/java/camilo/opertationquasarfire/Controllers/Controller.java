@@ -1,7 +1,6 @@
 package camilo.opertationquasarfire.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
-
 import camilo.opertationquasarfire.models.Satellite;
 import camilo.opertationquasarfire.models.SatelliteRequest;
 import camilo.opertationquasarfire.models.SatellitesRequest;
@@ -10,7 +9,9 @@ import camilo.opertationquasarfire.services.ServiceIntf;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,8 @@ public class Controller {
     }
 
     /**
-     * Handles the POST request to retrieve spaceship information from a list of satellite data
+     * Handles the POST request to retrieve spaceship information from a list of
+     * satellite data
      * 
      * @param request the list of satellite data
      * @return the spaceship information
@@ -44,10 +46,11 @@ public class Controller {
     }
 
     /**
-     * Handles the POST request to update data for a specific satellite and gets updated satellite data.
+     * Handles the POST request to update data for a specific satellite and gets
+     * updated satellite data.
      * 
      * @param satelliteName the name of the satellite to update
-     * @param request the satellite data to update
+     * @param request       the satellite data to update
      * @return The list of all satellite data
      */
     @Operation(summary = "Set one satellite data", description = "This endpoint allows updating data for a specific satellite and returns updated satellite data.")
@@ -59,7 +62,7 @@ public class Controller {
                 .body(this.service.setSatellite(satelliteName, request));
 
     }
-    
+
     /**
      * Handles the GET request to retrieve spaceship information.
      * 
@@ -84,6 +87,24 @@ public class Controller {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.service.getSatellites());
+    }
+
+    /**
+     * Handles the GET request to home page.
+     * 
+     * @return home page
+     */
+    @Operation(summary = "Home page", description = "Home page.")
+    @GetMapping("")
+    public ResponseEntity<HashMap<String, String>> home() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("appName", "Springboot - API - Opertation Quasar Fire");
+        map.put("swagger-ui",
+                "https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html/swagger-ui/index.html");
+        map.put("github", "https://github.com/CamiloSotoC/opertationquasarfire");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(map);
     }
 
 }
