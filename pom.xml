@@ -12,13 +12,23 @@
 	<artifactId>opertationquasarfire</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>opertationquasarfire</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Springboot - API - Operation Quasar Fire</description>
 	<url/>
 	<licenses>
-		<license/>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>CamiloS</id>
+			<name>Camilo Soto</name>
+			<email>camilo.soto@usach.cl</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
