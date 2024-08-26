@@ -100,7 +100,6 @@ public class Controller {
         map.put("appName", "Springboot - API - Opertation Quasar Fire");
         map.put("swagger-ui",
                 "https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html");
-        map.put("github", "https://github.com/CamiloSotoC/opertationquasarfire");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(map);
