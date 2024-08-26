@@ -23,7 +23,7 @@ class OpertationquasarfireApplicationTests {
 
         assertNotNull(openAPI);
         assertNotNull(openAPI.getInfo());
-        assertEquals("API - Operation Quasar Fire", openAPI.getInfo().getTitle());
+        assertEquals("Springboot - API - Operation Quasar Fire", openAPI.getInfo().getTitle());
         assertTrue(openAPI.getInfo().getDescription().contains("This repository contains the implementation of the 'Operation Quasar Fire' challenge in Java with SpringBoot."));
     }
 
