@@ -32,7 +32,7 @@ public class Controller {
      * @return the spaceship information
      */
     @Operation(summary = "Get spaceship information from satellites", description = "This endpoint receives a list of satellites and returns the spaceship information")
-    @PostMapping("/topsecret")
+    @PostMapping("/topsecret/")
     public ResponseEntity<SpaceshipResponse> postSatellites(
             @RequestBody SatellitesRequest request) {
         return ResponseEntity
@@ -76,7 +76,7 @@ public class Controller {
      * @return the list of all satellites
      */
     @Operation(summary = "Get all the satellite data", description = "This endpoint returns all the satellite data.")
-    @GetMapping("/satellites")
+    @GetMapping("/satellites/")
     public ResponseEntity<List<Satellite>> getSatellites() {
         return ResponseEntity
                 .status(HttpStatus.OK)
