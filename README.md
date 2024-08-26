@@ -43,11 +43,11 @@ satellite.satoY=100
 To run the application run the following command in the root of the project `mvn spring-boot:run`6
 
 ## How to Use the  API
-### 1° Enpoint
+### Endpoint 1
 To send satellite data and get the location and message of the spaceship.
 Sends satellite data with an HTTP POST request to:
-```
-url_server/topsecret/
+```http
+POST url_server/topsecret/
 ```
 With a JSON payload like the following:
 ```json
@@ -81,11 +81,11 @@ The response will be a JSON with the position and message of the spaceship.
   "message": "este es un mensaje secreto"
 }
 ```
-### 2° Enpoint 
+### Endpoint 2
 To set one satellite data 
 Sends one satellite data to update it. Send an HTTP POST request to:
-```
-url_server/topsecret_split/{satellite_name}
+```http
+POST url_server/topsecret_split/{satellite_name}
 ```
 With a JSON payload like the following:
 ```json
@@ -107,11 +107,11 @@ Where satellite 'kenobi' is updated:
     "message": ["", "", "un", "mensaje"]
 }
 ```
-### 3° Enpoint
+### Endpoint 3
 To get the location and message of the spaceship.
 Send an HTTP GET request to:
-```
-url_server/topsecret_split/
+```http
+GET url_server/topsecret_split/
 ```
 The response will be a JSON with the position and message of the emitter.
 ```json
@@ -123,11 +123,11 @@ The response will be a JSON with the position and message of the emitter.
   "message": "este es un mensaje secreto"
 }
 ```
-### 4° Enpoint
+### Endpoint 4
 To get all satellite data
 Send an HTTP GET request to:
-```
-url_server/satellites/
+```http
+GET url_server/satellites/
 ```
 The response will be a JSON with all the satellite data, for the following response example consider that the application has not been updated with the spaceship data.
 ```json
@@ -154,7 +154,8 @@ The response will be a JSON with all the satellite data, for the following respo
 ```
 ## Documentation & Testing - Swagger UI
 For more documentation and testing you can access swagger-ui:
-```
+```http
 url_server/swagger-ui/index.html
 ```
+Url to the application deployed:
 [https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html]
