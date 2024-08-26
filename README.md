@@ -24,7 +24,10 @@ To rebuild the message, the following steps are performed:
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
 
 ## ☁️ Deployed
-The application is deployed in Railway: [https://opertationquasarfire-production.up.railway.app](https://opertationquasarfire-production.up.railway.app)👆
+The application is deployed in:
+Railway: [https://opertationquasarfire-production.up.railway.app](https://opertationquasarfire-production.up.railway.app)👆
+Render: [https://opertationquasarfire.onrender.com](https://opertationquasarfire.onrender.com)👆
+Fly.io: [https://opertationquasarfire.fly.dev/](https://opertationquasarfire.fly.dev/)👆
 
 ## ⚙️ Configuration
 ### Satellite Data:
