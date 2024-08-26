@@ -1,32 +1,26 @@
-package camilo.opertationquasarfire.Services;
+package camilo.opertationquasarfire.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
-
 import java.util.List;
-
-import org.apache.commons.lang3.ObjectUtils.Null;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import camilo.opertationquasarfire.Exceptions.InformationException;
-import camilo.opertationquasarfire.Exceptions.ResquestException;
-import camilo.opertationquasarfire.Models.Position;
-import camilo.opertationquasarfire.Models.Satellite;
-import camilo.opertationquasarfire.Models.SatelliteRequest;
-import camilo.opertationquasarfire.Models.SpaceshipResponse;
-import camilo.opertationquasarfire.Repositories.Repository;
-import camilo.opertationquasarfire.Utils.UtilRebuilMessage;
+import camilo.opertationquasarfire.exceptions.InformationException;
+import camilo.opertationquasarfire.exceptions.ResquestException;
+import camilo.opertationquasarfire.models.Position;
+import camilo.opertationquasarfire.models.Satellite;
+import camilo.opertationquasarfire.models.SatelliteRequest;
+import camilo.opertationquasarfire.models.SpaceshipResponse;
+import camilo.opertationquasarfire.repositories.Repository;
 
 @ExtendWith(MockitoExtension.class)
-public class ServiceImpTest {
+class ServiceImpTest {
 
     @InjectMocks
     private ServiceImp service;
@@ -66,14 +60,9 @@ public class ServiceImpTest {
                 new Satellite("kenobi", new Position(-500, -200)),
                 new Satellite("skywalker", new Position(100, -100)),
                 new Satellite("sato", new Position(500, 100)));
-        List<Satellite> satellites2 = List.of(
-                new Satellite("kenobi", new Position(-500, -200)),
-                new Satellite("skywalker", new Position(100, -100)),
-                new Satellite("sato", new Position(500, 100)));
         when(repository.getSatellites()).thenReturn(satellites);
         List<Satellite> result = service.getSatellites();
         assertNotNull(result);
-        ;
         assertEquals(satellites, result);
     }
 
@@ -214,7 +203,7 @@ public class ServiceImpTest {
             InformationException.class,
                 () -> service.getSpaceshipData());
         assertEquals("INE2", e.getCode());
-        assertEquals("There is not enough information from satellite: 'kenobi'.", e.getMessage());
+        assertEquals("There is not enough information from satellites.", e.getMessage());
     }
 
     @Test
