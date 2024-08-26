@@ -1,6 +1,6 @@
 FROM openjdk:17
 
-RUN mvn install
+RUN mvn clean package
 
 WORKDIR /app
 
