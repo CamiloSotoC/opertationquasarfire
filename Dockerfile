@@ -1,8 +1,6 @@
 FROM openjdk:17
 
-RUN mvn clean package
-
-WORKDIR /app
+RUN mvn install
 
 EXPOSE 3000
 
