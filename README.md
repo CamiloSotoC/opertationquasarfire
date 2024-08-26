@@ -19,7 +19,6 @@ To rebuild the message, the following steps are performed:
 ## ✨ Dependencies
 * Java 17
 * Springboot 3.4.0
-* Maven 4.0.0
 * Lombok 1.18.34
 * [Trilateration 1.0.2](https://github.com/lemmingapex/trilateration)👆
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
@@ -28,11 +27,6 @@ To rebuild the message, the following steps are performed:
 The application is deployed in Railway: [https://opertationquasarfire-production.up.railway.app](https://opertationquasarfire-production.up.railway.app)👆
 
 ## ⚙️ Configuration
-### Port:
-The application will run by default on port 8080, you can modify it in the application.properties with the following variable: 
-```
-server.port=8080
-```
 ### Satellite Data:
 The name and location of the satellites are already configured:
 ```
