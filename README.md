@@ -47,7 +47,7 @@ To run the application run the following command in the root of the project `mvn
 To send satellite data and get the location and message of the spaceship.
 Sends satellite data with an HTTP POST request to:
 ```http
-POST url_server/topsecret/
+POST /topsecret/
 ```
 With a JSON payload like the following:
 ```json
@@ -85,7 +85,7 @@ The response will be a JSON with the position and message of the spaceship.
 To set one satellite data 
 Sends one satellite data to update it. Send an HTTP POST request to:
 ```http
-POST url_server/topsecret_split/{satellite_name}
+POST /topsecret_split/{satellite_name}
 ```
 With a JSON payload like the following:
 ```json
@@ -95,8 +95,8 @@ With a JSON payload like the following:
 }
 ```
 The response will be a JSON with updated satellite data. For the following response example consider the POST request:
-```
-url_server/topsecret_split/kenobi
+```http
+POST /topsecret_split/kenobi
 ```
 Where satellite 'kenobi' is updated:
 ```json
@@ -111,7 +111,7 @@ Where satellite 'kenobi' is updated:
 To get the location and message of the spaceship.
 Send an HTTP GET request to:
 ```http
-GET url_server/topsecret_split/
+GET /topsecret_split/
 ```
 The response will be a JSON with the position and message of the emitter.
 ```json
@@ -127,7 +127,7 @@ The response will be a JSON with the position and message of the emitter.
 To get all satellite data
 Send an HTTP GET request to:
 ```http
-GET url_server/satellites/
+GET /satellites/
 ```
 The response will be a JSON with all the satellite data, for the following response example consider that the application has not been updated with the spaceship data.
 ```json
@@ -155,7 +155,7 @@ The response will be a JSON with all the satellite data, for the following respo
 ## Documentation & Testing - Swagger UI
 For more documentation and testing you can access swagger-ui:
 ```http
-url_server/swagger-ui/index.html
+GET /swagger-ui/index.html
 ```
 Url to the application deployed:
 [https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html]
