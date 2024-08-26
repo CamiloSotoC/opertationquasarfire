@@ -1,7 +1,5 @@
 FROM openjdk:17
 
-RUN mvn clean
-
 RUN mvn install
 
 WORKDIR /app
