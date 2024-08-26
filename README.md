@@ -12,7 +12,7 @@ To rebuild the message, the following steps are performed:
 * A list of lists 'A' is created where each internal list represents a position in the original message.
 * The input messages are iterated over and each word is added to the corresponding internal list of 'A' according to its position.
 * Then, 'A' is iterated over and the most common word for each position is obtained (If the word previously obtained as the most common appears again in the next internal list of 'A', it is removed once from that internal list).
-* The most common word for each position is added to the rebuild message list.
+* The most common word for each position is added to the rebuilded message list.
 * Finally, the rebuilded message is returned as a string, with the words separated by spaces.
 
 ## ✨ Dependencies
