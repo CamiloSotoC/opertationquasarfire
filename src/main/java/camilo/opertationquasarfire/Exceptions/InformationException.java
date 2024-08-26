@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class InformationException extends RuntimeException {
 
-    private String code;
+    private final String code;
 
     public InformationException(String code) {
         super("There is not enough information from satellites.");

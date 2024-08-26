@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class ResquestException extends RuntimeException {
 
-    private String code;
+    private final String code;
 
     public ResquestException(String code) {
         super("There is not enough information from satellites.");
