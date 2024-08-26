@@ -3,7 +3,7 @@ This repository contains the implementation of the "Operation Quasar Fire" chall
 The goal is to create a program that returns the location and rebuild the distress message of an Imperial cargo ship adrift in an asteroid field.
 
 ## 🫀 Location Search Algorithm
-To obtain the location of the spaceship, an external library was used [https://github.com/lemmingapex/trilateration] 👆, which performs trilateralization through a non-linear least squares system. This requires at least three positions (of the satellites) and three distances (from the satellites to the spaceship) to obtain an approximate location of the spaceship.
+To obtain the location of the spaceship, an [external library](https://github.com/lemmingapex/trilateration) was used, which performs trilateralization through a [Non-linear least squares methods](https://en.wikipedia.org/wiki/Non-linear_least_squares). This requires at least three positions (of the satellites) and three distances (from the satellites to the spaceship) to obtain an approximate location of the spaceship.
 
 ## 🫀 Rebuild Message Algorithm
 To rebuild the message, the following steps are performed:
