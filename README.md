@@ -3,7 +3,7 @@ This repository contains the implementation of the "Operation Quasar Fire" chall
 The goal is to create a program that returns the location and rebuild the distress message of an Imperial cargo ship adrift in an asteroid field.
 
 ## 🫀 Location Search Algorithm
-To obtain the location of the spaceship, an [external library](https://github.com/lemmingapex/trilateration) was used, which performs trilateralization through a [Non-linear least squares methods](https://en.wikipedia.org/wiki/Non-linear_least_squares). This requires at least three positions (of the satellites) and three distances (from the satellites to the spaceship) to obtain an approximate location of the spaceship.
+To obtain the location of the spaceship, an external library [Trilateration](https://github.com/lemmingapex/trilateration) was used, which performs trilateralization through a [Non-linear least squares methods](https://en.wikipedia.org/wiki/Non-linear_least_squares). This requires at least three positions (of the satellites) and three distances (from the satellites to the spaceship) to obtain an approximate location of the spaceship.
 
 ## 🫀 Rebuild Message Algorithm
 To rebuild the message, the following steps are performed:
@@ -20,12 +20,11 @@ To rebuild the message, the following steps are performed:
 * Springboot 3.4.0
 * Maven 4.0.0
 * Lombok 1.18.34
-* Trilateration 1.0.2 (https://github.com/lemmingapex/trilateration)👆
+* [Trilateration 1.0.2](https://github.com/lemmingapex/trilateration)👆
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
 
 ## ☁️ Deployed
-The application is deployed in Railway:
-[https://opertationquasarfire-production.up.railway.app/satellites/]👆
+The application is deployed in Railway: [✅](https://opertationquasarfire-production.up.railway.app)👆
 
 ## ⚙️ Configuration
 ### Port:
@@ -51,7 +50,7 @@ satellite.satoX=500
 satellite.satoY=100
 ```
 ## 💻 Executing program
-To run the application run the following command in the root of the project `mvn spring-boot:run`6
+To run the application run the following command in the root of the project `mvn spring-boot:run`.
 
 ## 💁‍♀️ How to Use the  API
 ### 🟢 Endpoint 1
