@@ -3,6 +3,8 @@ package camilo.opertationquasarfire.controllers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,9 +32,9 @@ class ControllerTest {
     @Test
     void testGetSatellites() {
         List<Satellite> response = List.of(
-            new Satellite("kenobi", new Position(-500, -200)),
-            new Satellite("skywalker", new Position(100, -100)));
-            new Satellite("sato", new Position(500, 100));
+                new Satellite("kenobi", new Position(-500, -200)),
+                new Satellite("skywalker", new Position(100, -100)));
+        new Satellite("sato", new Position(500, 100));
         when(service.getSatellites()).thenReturn(response);
         ResponseEntity<List<Satellite>> result = controller.getSatellites();
         verify(service).getSatellites();
@@ -42,21 +44,21 @@ class ControllerTest {
 
     @Test
     void testGetSpaceshipData() {
-         SpaceshipResponse response = new SpaceshipResponse(
-            new Position(-58.315252587138595, -69.55141837312165),"este es un mensaje secreto");
-         when(service.getSpaceshipData()).thenReturn(response);
-         ResponseEntity<SpaceshipResponse> result = controller.getSpaceshipData();
-         verify(service).getSpaceshipData();
-         assertEquals(HttpStatus.OK, result.getStatusCode());
-         assertEquals(response, result.getBody());
+        SpaceshipResponse response = new SpaceshipResponse(
+                new Position(-58.315252587138595, -69.55141837312165), "este es un mensaje secreto");
+        when(service.getSpaceshipData()).thenReturn(response);
+        ResponseEntity<SpaceshipResponse> result = controller.getSpaceshipData();
+        verify(service).getSpaceshipData();
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(response, result.getBody());
 
     }
 
     @Test
     void testPostSatelliteData() {
         String satelliteName = "kenobi";
-        SatelliteRequest request = new SatelliteRequest( 50.0, List.of("este","","un","",""));
-        Satellite response = new Satellite("kenobi", new Position(-500, -200), 50.0, List.of("este","","un","",""));
+        SatelliteRequest request = new SatelliteRequest(50.0, List.of("este", "", "un", "", ""));
+        Satellite response = new Satellite("kenobi", new Position(-500, -200), 50.0, List.of("este", "", "un", "", ""));
         when(service.setSatellite(satelliteName, request)).thenReturn(response);
         ResponseEntity<Satellite> result = controller.postSatelliteData(satelliteName, request);
         verify(service).setSatellite(satelliteName, request);
@@ -67,18 +69,31 @@ class ControllerTest {
 
     @Test
     void testPostSatellites() {
-         List<SatelliteRequest> satellitesRequest = List.of(
-            new SatelliteRequest("kenobi", 100.0, List.of("este","","","mensaje","")),
-            new SatelliteRequest("skywalker", 115.5, List.of("","es","","","secreto")),
-            new SatelliteRequest("sato", 142.7, List.of("este","","un","","")));
+        List<SatelliteRequest> satellitesRequest = List.of(
+                new SatelliteRequest("kenobi", 100.0, List.of("este", "", "", "mensaje", "")),
+                new SatelliteRequest("skywalker", 115.5, List.of("", "es", "", "", "secreto")),
+                new SatelliteRequest("sato", 142.7, List.of("este", "", "un", "", "")));
         SatellitesRequest request = new SatellitesRequest();
         request.setSatellites(satellitesRequest);
         SpaceshipResponse response = new SpaceshipResponse(
-            new Position(-58.315252587138595, -69.55141837312165),"este es un mensaje secreto");
+                new Position(-58.315252587138595, -69.55141837312165), "este es un mensaje secreto");
         when(service.getSpaceshipData(request.getSatellites())).thenReturn(response);
         ResponseEntity<SpaceshipResponse> result = controller.postSatellites(request);
         verify(service).getSpaceshipData(request.getSatellites());
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(response, result.getBody());
     }
+
+    @Test
+    void testHome() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("appName", "Springboot - API - Opertation Quasar Fire");
+        map.put("swagger-ui",
+                "https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html/swagger-ui/index.html");
+        map.put("github", "https://github.com/CamiloSotoC/opertationquasarfire");
+        ResponseEntity<HashMap<String, String>> response = controller.home();
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(map, response.getBody());
+    }
+
 }
