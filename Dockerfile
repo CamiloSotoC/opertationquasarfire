@@ -1,4 +1,4 @@
-FROM maven:3.9.9-jdk-17
+FROM maven:3.8.2-jdk-17
 
 RUN mvn install
 
