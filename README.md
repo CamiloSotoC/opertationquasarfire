@@ -2,6 +2,19 @@
 This repository contains the implementation of the "Operation Quasar Fire" challenge in Java with SpringBoot.
 The goal is to create a program that returns the location and rebuild the distress message of an Imperial cargo ship adrift in an asteroid field.
 
+## 🫀 Location Search Algorithm
+To obtain the location of the spaceship, an external library was used[https://github.com/lemmingapex/trilateration]👆, which performs trilateralization through a non-linear least squares system. This requires at least three positions (of the satellites) and three distances (from the satellites to the spaceship) to obtain an approximate location of the spaceship.
+
+## 🫀 Rebuild Message Algorithm
+To rebuild the message, the following steps are performed:
+* First, have the messages obtained by the satellites.
+* Then, find the maximum length to determine the number of positions in the original message.
+* A list of lists 'A' is created where each internal list represents a position in the original message.
+* The input messages are iterated over and each word is added to the corresponding internal list of 'A' according to its position.
+* Then, 'A' is iterated over and the most common word for each position is obtained (If the word previously obtained as the most common appears again in the next internal list of 'A', it is removed once from that internal list).
+* The most common word for each position is added to the reconstructed message list.
+* Finally, the rebuilded message is returned as a string, with the words separated by spaces.
+
 ## ✨ Dependencies
 * Java 17
 * Springboot 3.4.0
