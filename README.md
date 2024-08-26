@@ -1,28 +1,26 @@
-# Springboot - API - Opertation Quasar Fire
-## Description
+# Springboot - API - Opertation Quasar Fire 🚀
 This repository contains the implementation of the "Operation Quasar Fire" challenge in Java with SpringBoot.
 The goal is to create a program that returns the location and rebuild the distress message of an Imperial cargo ship adrift in an asteroid field.
 
-## Dependencies
+## ✨ Dependencies
 * Java 17
 * Springboot 3.4.0
 * Maven 4.0.0
 * Lombok 1.18.34
-* Trilateration 1.0.2 (https://github.com/lemmingapex/trilateration)
+* Trilateration 1.0.2 (https://github.com/lemmingapex/trilateration)👆
 * SpringDoc OpenAPI Starter WebMVC UI 2.6.0
 
-## Deployed
+## ☁️ Deployed
 The application is deployed in Railway:
-[https://opertationquasarfire-production.up.railway.app/satellites/]
+[https://opertationquasarfire-production.up.railway.app/satellites/]👆
 
-## Getting Started
-
-### Configuration
+## ⚙️ Configuration
+### Port:
 The application will run by default on port 8080, you can modify it in the application.properties with the following variable: 
 ```
 server.port=8080
 ```
-#### Satellite Data:
+### Satellite Data:
 The name and location of the satellites are already configured:
 ```
 Kenobi: [-500, -200]
@@ -39,11 +37,11 @@ satellite.skywalkerY=-100
 satellite.satoX=500
 satellite.satoY=100
 ```
-### Executing program
+## 💻 Executing program
 To run the application run the following command in the root of the project `mvn spring-boot:run`6
 
-## How to Use the  API
-### Endpoint 1
+## 💁‍♀️ How to Use the  API
+### 🟢 Endpoint 1
 To send satellite data and get the location and message of the spaceship.
 Sends satellite data with an HTTP POST request to:
 ```http
@@ -81,7 +79,7 @@ The response will be a JSON with the position and message of the spaceship.
   "message": "este es un mensaje secreto"
 }
 ```
-### Endpoint 2
+### 🟢 Endpoint 2
 To set one satellite data 
 Sends one satellite data to update it. Send an HTTP POST request to:
 ```http
@@ -107,7 +105,7 @@ Where satellite 'kenobi' is updated:
     "message": ["", "", "un", "mensaje"]
 }
 ```
-### Endpoint 3
+### 🟢 Endpoint 3
 To get the location and message of the spaceship.
 Send an HTTP GET request to:
 ```http
@@ -123,7 +121,7 @@ The response will be a JSON with the position and message of the emitter.
   "message": "este es un mensaje secreto"
 }
 ```
-### Endpoint 4
+### 🟢 Endpoint 4
 To get all satellite data
 Send an HTTP GET request to:
 ```http
@@ -152,10 +150,10 @@ The response will be a JSON with all the satellite data, for the following respo
   }
 ]
 ```
-## Documentation & Testing - Swagger UI
+## 📝 Documentation & Testing - Swagger UI
 For more documentation and testing you can access swagger-ui:
 ```http
 GET /swagger-ui/index.html
 ```
 Url to the application deployed:
-[https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html]
+[https://opertationquasarfire-production.up.railway.app/swagger-ui/index.html]👆
