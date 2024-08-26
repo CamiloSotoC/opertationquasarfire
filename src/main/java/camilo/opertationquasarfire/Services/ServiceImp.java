@@ -1,26 +1,28 @@
-package camilo.opertationquasarfire.Services;
+package camilo.opertationquasarfire.services;
 
 import java.util.List;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
 import org.apache.commons.math3.linear.RealVector;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
 import com.lemmingapex.trilateration.TrilaterationFunction;
-import camilo.opertationquasarfire.Exceptions.InformationException;
-import camilo.opertationquasarfire.Exceptions.ResquestException;
-import camilo.opertationquasarfire.Models.Position;
-import camilo.opertationquasarfire.Models.Satellite;
-import camilo.opertationquasarfire.Models.SatelliteRequest;
-import camilo.opertationquasarfire.Models.SpaceshipResponse;
-import camilo.opertationquasarfire.Repositories.Repository;
-import camilo.opertationquasarfire.Utils.UtilRebuilMessage;
+import camilo.opertationquasarfire.exceptions.InformationException;
+import camilo.opertationquasarfire.exceptions.ResquestException;
+import camilo.opertationquasarfire.models.Position;
+import camilo.opertationquasarfire.models.Satellite;
+import camilo.opertationquasarfire.models.SatelliteRequest;
+import camilo.opertationquasarfire.models.SpaceshipResponse;
+import camilo.opertationquasarfire.repositories.Repository;
+import camilo.opertationquasarfire.utils.UtilRebuilMessage;
 
 @Service
 public class ServiceImp implements ServiceIntf {
 
-    @Autowired
-    Repository repository;
+    private final Repository repository;
+
+    ServiceImp(Repository repository) {
+        this.repository = repository;
+    }
 
     public List<Satellite> getSatellites() {
         return this.repository.getSatellites();
@@ -35,14 +37,16 @@ public class ServiceImp implements ServiceIntf {
             arrayPositions[i][1] = satellites.get(i).getPosition().getY();
         }
         double[] arrayDistances = distances.stream().mapToDouble(i -> i).toArray();
-        // LinearLeastSquaresSolver lSolver = new LinearLeastSquaresSolver(new
-        // TrilaterationFunction(arrayPositions, arrayDistances));
-        // RealVector realVector = lSolver.solve();
+        /*
+        LinearLeastSquaresSolver lSolver = new LinearLeastSquaresSolver(new
+        TrilaterationFunction(arrayPositions, arrayDistances));
+        RealVector realVector = lSolver.solve();
+        */
         NonLinearLeastSquaresSolver nLSolver = new NonLinearLeastSquaresSolver(
-                new TrilaterationFunction(arrayPositions, arrayDistances), new LevenbergMarquardtOptimizer());
+                new TrilaterationFunction(arrayPositions, arrayDistances),
+                new LevenbergMarquardtOptimizer());
         RealVector realVector = nLSolver.solve().getPoint();
-        Position location = new Position(realVector.toArray()[0], realVector.toArray()[1]);
-        return location;
+        return new Position(realVector.toArray()[0], realVector.toArray()[1]);
     }
 
     @Override
@@ -53,10 +57,10 @@ public class ServiceImp implements ServiceIntf {
     @Override
     public SpaceshipResponse getSpaceshipData(List<SatelliteRequest> satellitesRequest) {
         if (satellitesRequest == null || satellitesRequest.size() < 3)
-            throw new ResquestException("RQE1","There is not enough information from satellites.");
+            throw new ResquestException("RQE1");
         for (SatelliteRequest sRequest : satellitesRequest) {
             if (sRequest == null || sRequest.getName() == null)
-                throw new ResquestException("RQE2","There is not enough information from satellites.");
+                throw new ResquestException("RQE2");
             Satellite satellite = this.repository.getSatelliteByName(sRequest.getName());
             if (satellite == null)
                 throw new ResquestException("RQE3","That satellite does not exist: '" + sRequest.getName() + "'.");
@@ -66,26 +70,23 @@ public class ServiceImp implements ServiceIntf {
             satellite.setDistance(sRequest.getDistance());
             satellite.setMessage(sRequest.getMessage());
         }
-        SpaceshipResponse spaceshipData = new SpaceshipResponse(
-                this.getLocation(this.repository.getDistances()),
-                this.getMessage(this.repository.getMessages()));
-
-        return spaceshipData;
+        return new SpaceshipResponse(
+            this.getLocation(this.repository.getDistances()),
+            this.getMessage(this.repository.getMessages()));
     }
 
     public SpaceshipResponse getSpaceshipData() throws RuntimeException {
         List<Satellite> satellites = this.repository.getSatellites();
         if (satellites == null || satellites.size() < 3)
-            throw new InformationException("INE1","There is not enough information from satellites.");
+            throw new InformationException("INE1");
         for (Satellite s : satellites) {
             if (s.getDistance() == null || s.getMessage() == null) {
-                throw new InformationException("INE2","There is not enough information from satellite: '" + s.getName() + "'.");
+                throw new InformationException("INE2");
             }
         }
-        SpaceshipResponse spaceshipData = new SpaceshipResponse(
-                this.getLocation(this.repository.getDistances()),
-                this.getMessage(this.repository.getMessages()));
-        return spaceshipData;
+        return new SpaceshipResponse(
+            this.getLocation(this.repository.getDistances()),
+            this.getMessage(this.repository.getMessages()));
     }
 
     @Override

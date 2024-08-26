@@ -1,11 +1,11 @@
-package camilo.opertationquasarfire.Services;
+package camilo.opertationquasarfire.services;
 
 import java.util.List;
 
-import camilo.opertationquasarfire.Models.Position;
-import camilo.opertationquasarfire.Models.Satellite;
-import camilo.opertationquasarfire.Models.SatelliteRequest;
-import camilo.opertationquasarfire.Models.SpaceshipResponse;
+import camilo.opertationquasarfire.models.Position;
+import camilo.opertationquasarfire.models.Satellite;
+import camilo.opertationquasarfire.models.SatelliteRequest;
+import camilo.opertationquasarfire.models.SpaceshipResponse;
 
 public interface ServiceIntf {
 
