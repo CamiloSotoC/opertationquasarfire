@@ -1,6 +1,6 @@
-FROM maven:eclipse-temurin:17-jdk
+FROM maven:3.8.2-jdk-17
 
-CMD [ "maven", "install" ]
+RUN mvn install
 
 WORKDIR /app
 
