@@ -17,7 +17,7 @@ public class OpertationquasarfireApplication {
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
 				.info(new Info()
-						.title("API - Operation Quasar Fire")
+						.title("Springboot - API - Operation Quasar Fire")
 						.description("This repository contains the implementation of the 'Operation Quasar Fire' challenge in Java with SpringBoot."
 						+"<br>"
 						+"The goal is to create a program that returns the location and rebuild the distress message of an Imperial cargo ship adrift in an asteroid field."));
