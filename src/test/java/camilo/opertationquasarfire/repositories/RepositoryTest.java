@@ -17,7 +17,7 @@ import camilo.opertationquasarfire.models.Satellite;
 class RepositoryTest {
 
     @InjectMocks
-    private Repository repository;
+    private RepositoryImpl repository;
 
     @Value("${satellite.kenobiX}")
     private double kenobiX;

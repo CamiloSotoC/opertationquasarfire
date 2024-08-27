@@ -19,16 +19,16 @@ import camilo.opertationquasarfire.models.Position;
 import camilo.opertationquasarfire.models.Satellite;
 import camilo.opertationquasarfire.models.SatelliteRequest;
 import camilo.opertationquasarfire.models.SpaceshipResponse;
-import camilo.opertationquasarfire.repositories.Repository;
+import camilo.opertationquasarfire.repositories.RepositoryImpl;
 
 @ExtendWith(MockitoExtension.class)
 class ServiceImpTest {
 
         @InjectMocks
-        private ServiceImp service;
+        private ServiceImpl service;
 
         @Mock
-        private Repository repository;
+        private RepositoryImpl repository;
 
         @Test
         void testGetLocation() {

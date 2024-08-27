@@ -10,7 +10,7 @@ import camilo.opertationquasarfire.models.Satellite;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class Repository {
+public class RepositoryImpl implements RepositoryIntf{
 
     @Value("${satellite.kenobiX}")
     private double kenobiX;
@@ -45,11 +45,12 @@ public class Repository {
         this.satoY = satoY;
     }
 
-
+    @Override
     public List<Satellite> getSatellites() {        
         return satellites;
     }
 
+    @Override
     public Satellite getSatelliteByName(String name) {
         for (Satellite satellite : this.getSatellites()) {
             if (satellite.getName().equalsIgnoreCase(name)) {
@@ -58,7 +59,8 @@ public class Repository {
         }
         return null;
     }
-
+    
+    @Override
     public List<Double> getDistances() {
         List<Double> distances = new ArrayList<>();
         for (Satellite satellite : this.getSatellites()) {
@@ -67,6 +69,7 @@ public class Repository {
         return distances;
     }
 
+    @Override
     public List<List<String>> getMessages() {
         List<List<String>> messages = new ArrayList<>();
         for (Satellite satellite : this.getSatellites()) {

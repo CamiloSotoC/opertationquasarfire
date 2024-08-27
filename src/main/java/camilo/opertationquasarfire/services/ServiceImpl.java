@@ -12,15 +12,15 @@ import camilo.opertationquasarfire.models.Position;
 import camilo.opertationquasarfire.models.Satellite;
 import camilo.opertationquasarfire.models.SatelliteRequest;
 import camilo.opertationquasarfire.models.SpaceshipResponse;
-import camilo.opertationquasarfire.repositories.Repository;
+import camilo.opertationquasarfire.repositories.RepositoryImpl;
 import camilo.opertationquasarfire.utils.UtilRebuilMessage;
 
 @Service
-public class ServiceImp implements ServiceIntf {
+public class ServiceImpl implements ServiceIntf {
 
-    private final Repository repository;
+    private final RepositoryImpl repository;
 
-    ServiceImp(Repository repository) {
+    ServiceImpl(RepositoryImpl repository) {
         this.repository = repository;
     }
 
@@ -75,6 +75,7 @@ public class ServiceImp implements ServiceIntf {
             this.getMessage(this.repository.getMessages()));
     }
 
+    @Override
     public SpaceshipResponse getSpaceshipData() throws RuntimeException {
         List<Satellite> satellites = this.repository.getSatellites();
         if (satellites == null || satellites.size() < 3)
