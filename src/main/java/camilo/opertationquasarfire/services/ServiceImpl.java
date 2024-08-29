@@ -41,10 +41,10 @@ public class ServiceImpl implements ServiceIntf {
         }
         double[] arrayDistances = distances.stream().mapToDouble(i -> i).toArray();
         /*
-        LinearLeastSquaresSolver lSolver = new LinearLeastSquaresSolver(new
-        TrilaterationFunction(arrayPositions, arrayDistances));
-        RealVector realVector = lSolver.solve();
-        */
+         * LinearLeastSquaresSolver lSolver = new LinearLeastSquaresSolver(new
+         * TrilaterationFunction(arrayPositions, arrayDistances));
+         * RealVector realVector = lSolver.solve();
+         */
         NonLinearLeastSquaresSolver nLSolver = new NonLinearLeastSquaresSolver(
                 new TrilaterationFunction(arrayPositions, arrayDistances),
                 new LevenbergMarquardtOptimizer());
@@ -59,64 +59,58 @@ public class ServiceImpl implements ServiceIntf {
 
     @Override
     public SpaceshipResponse getSpaceshipData(List<SatelliteRequest> satellitesRequest) {
-        if (satellitesRequest == null || satellitesRequest.size() < 3){
+        if (satellitesRequest == null || satellitesRequest.size() < 3) {
             logger.error("RQE1 - There is not enough information from satellites.");
             throw new ResquestException("RQE1");
         }
-            
         for (SatelliteRequest sRequest : satellitesRequest) {
-            if (sRequest == null || sRequest.getName() == null){
+            if (sRequest == null || sRequest.getName() == null) {
                 logger.error("RQE2 - There is not enough information from satellites.");
                 throw new ResquestException("RQE2");
             }
-                
             Satellite satellite = this.repository.getSatelliteByName(sRequest.getName());
-            if (satellite == null){
-                logger.error("RQE3 - That satellite does not exist: '" + sRequest.getName() + "'.");
-                throw new ResquestException("RQE3","That satellite does not exist: '" + sRequest.getName() + "'.");
+            if (satellite == null) {
+                logger.error("RQE3 - That satellite does not exist: '{}'.", sRequest.getName());
+                throw new ResquestException("RQE3", "That satellite does not exist: '" + sRequest.getName() + "'.");
             }
-                
-            if (sRequest.getDistance() == null || sRequest.getMessage() == null){
-                logger.error("RQE4 - There is not enough information from satellite: '" + sRequest.getName() + "'.");
+            if (sRequest.getDistance() == null || sRequest.getMessage() == null) {
+                logger.error("RQE4 - There is not enough information from satellite: '{}'.", sRequest.getName());
                 throw new ResquestException("RQE4",
                         "There is not enough information from satellite: '" + sRequest.getName() + "'.");
             }
-                
             satellite.setDistance(sRequest.getDistance());
             satellite.setMessage(sRequest.getMessage());
         }
         return new SpaceshipResponse(
-            this.getLocation(this.repository.getDistances()),
-            this.getMessage(this.repository.getMessages()));
+                this.getLocation(this.repository.getDistances()),
+                this.getMessage(this.repository.getMessages()));
     }
 
     @Override
     public SpaceshipResponse getSpaceshipData() throws RuntimeException {
         List<Satellite> satellites = this.repository.getSatellites();
-        if (satellites == null || satellites.size() < 3){
-            logger.error("INE1 - There is not enough information from satellites.");            
+        if (satellites == null || satellites.size() < 3) {
+            logger.error("INE1 - There is not enough information from satellites.");
             throw new InformationException("INE1");
         }
-            
         for (Satellite s : satellites) {
             if (s.getDistance() == null || s.getMessage() == null) {
-                logger.error("INE2 - There is not enough information from satellites.");         
+                logger.error("INE2 - There is not enough information from satellites.");
                 throw new InformationException("INE2");
             }
         }
         return new SpaceshipResponse(
-            this.getLocation(this.repository.getDistances()),
-            this.getMessage(this.repository.getMessages()));
+                this.getLocation(this.repository.getDistances()),
+                this.getMessage(this.repository.getMessages()));
     }
 
     @Override
     public Satellite setSatellite(String name, SatelliteRequest request) {
         Satellite satellite = this.repository.getSatelliteByName(name);
-        if (satellite == null){
-            logger.error("INE3 - There is not enough information from satellites.");
-            throw new InformationException("INE3","That satellite does not exist: '" + name + "'.");
+        if (satellite == null) {
+            logger.error("INE3 - That satellite does not exist: '{}'.", name);
+            throw new InformationException("INE3", "That satellite does not exist: '" + name + "'.");
         }
-            
         satellite.setDistance(request.getDistance());
         satellite.setMessage(request.getMessage());
         return satellite;
