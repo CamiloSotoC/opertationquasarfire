@@ -8,8 +8,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -33,7 +31,13 @@ public class SecurityConfig {
                     //management.sessionFixation().migrateSession();// migrateSession - newSession - none
                     //management.maximumSessions(1).sessionRegistry(sessionRegistry());
                 })
-                .httpBasic(basic -> {})
+                .httpBasic(basic -> {
+                })
+                .csrf(csrf -> {
+                    //csrf.disable();
+                    csrf.ignoringRequestMatchers("/topsecret/");
+                    csrf.ignoringRequestMatchers("/topsecret_split/*");
+                })
                 .build();
 
     }
