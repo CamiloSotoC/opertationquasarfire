@@ -3,6 +3,8 @@ package camilo.opertationquasarfire.services;
 import java.util.List;
 import org.apache.commons.math3.fitting.leastsquares.LevenbergMarquardtOptimizer;
 import org.apache.commons.math3.linear.RealVector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.lemmingapex.trilateration.NonLinearLeastSquaresSolver;
 import com.lemmingapex.trilateration.TrilaterationFunction;
@@ -19,6 +21,7 @@ import camilo.opertationquasarfire.utils.UtilRebuilMessage;
 public class ServiceImpl implements ServiceIntf {
 
     private final RepositoryImpl repository;
+    private static Logger logger = LoggerFactory.getLogger(ServiceImpl.class);
 
     ServiceImpl(RepositoryImpl repository) {
         this.repository = repository;
@@ -56,17 +59,29 @@ public class ServiceImpl implements ServiceIntf {
 
     @Override
     public SpaceshipResponse getSpaceshipData(List<SatelliteRequest> satellitesRequest) {
-        if (satellitesRequest == null || satellitesRequest.size() < 3)
+        if (satellitesRequest == null || satellitesRequest.size() < 3){
+            logger.error("RQE1 - There is not enough information from satellites.");
             throw new ResquestException("RQE1");
+        }
+            
         for (SatelliteRequest sRequest : satellitesRequest) {
-            if (sRequest == null || sRequest.getName() == null)
+            if (sRequest == null || sRequest.getName() == null){
+                logger.error("RQE2 - There is not enough information from satellites.");
                 throw new ResquestException("RQE2");
+            }
+                
             Satellite satellite = this.repository.getSatelliteByName(sRequest.getName());
-            if (satellite == null)
+            if (satellite == null){
+                logger.error("RQE3 - That satellite does not exist: '" + sRequest.getName() + "'.");
                 throw new ResquestException("RQE3","That satellite does not exist: '" + sRequest.getName() + "'.");
-            if (sRequest.getDistance() == null || sRequest.getMessage() == null)
+            }
+                
+            if (sRequest.getDistance() == null || sRequest.getMessage() == null){
+                logger.error("RQE4 - There is not enough information from satellite: '" + sRequest.getName() + "'.");
                 throw new ResquestException("RQE4",
                         "There is not enough information from satellite: '" + sRequest.getName() + "'.");
+            }
+                
             satellite.setDistance(sRequest.getDistance());
             satellite.setMessage(sRequest.getMessage());
         }
@@ -78,10 +93,14 @@ public class ServiceImpl implements ServiceIntf {
     @Override
     public SpaceshipResponse getSpaceshipData() throws RuntimeException {
         List<Satellite> satellites = this.repository.getSatellites();
-        if (satellites == null || satellites.size() < 3)
+        if (satellites == null || satellites.size() < 3){
+            logger.error("INE1 - There is not enough information from satellites.");            
             throw new InformationException("INE1");
+        }
+            
         for (Satellite s : satellites) {
             if (s.getDistance() == null || s.getMessage() == null) {
+                logger.error("INE2 - There is not enough information from satellites.");         
                 throw new InformationException("INE2");
             }
         }
@@ -93,8 +112,11 @@ public class ServiceImpl implements ServiceIntf {
     @Override
     public Satellite setSatellite(String name, SatelliteRequest request) {
         Satellite satellite = this.repository.getSatelliteByName(name);
-        if (satellite == null)
+        if (satellite == null){
+            logger.error("INE3 - There is not enough information from satellites.");
             throw new InformationException("INE3","That satellite does not exist: '" + name + "'.");
+        }
+            
         satellite.setDistance(request.getDistance());
         satellite.setMessage(request.getMessage());
         return satellite;

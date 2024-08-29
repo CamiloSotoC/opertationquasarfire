@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.HashMap;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ public class Controller {
      * The service interface for the controller.
      */
     private final ServiceIntf service;
+    private static Logger logger = LoggerFactory.getLogger(Controller.class);
 
     Controller(ServiceIntf service) {
         this.service = service;
@@ -39,6 +43,7 @@ public class Controller {
     @PostMapping("/topsecret/")
     public ResponseEntity<SpaceshipResponse> postSatellites(
             @RequestBody SatellitesRequest request) {
+                logger.info("POST request to endpoint '/topsecret/'.");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.service.getSpaceshipData(request.getSatellites()));
@@ -56,6 +61,7 @@ public class Controller {
     @PostMapping("/topsecret_split/{satelliteName}")
     public ResponseEntity<Satellite> postSatelliteData(
             @PathVariable String satelliteName, @RequestBody SatelliteRequest request) {
+                logger.info("POST request to endpoint '/topsecret/{}'.",satelliteName);
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
                 .body(this.service.setSatellite(satelliteName, request));
@@ -70,6 +76,7 @@ public class Controller {
     @Operation(summary = "Get spaceship information from satellites", description = "This endpoint returns the spaceship information.")
     @GetMapping("/topsecret_split/")
     public ResponseEntity<SpaceshipResponse> getSpaceshipData() {
+        logger.info("GET request to endpoint '/topsecret_split/'.");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.service.getSpaceshipData());
@@ -83,6 +90,7 @@ public class Controller {
     @Operation(summary = "Get all the satellite data", description = "This endpoint returns all the satellite data.")
     @GetMapping("/satellites/")
     public ResponseEntity<List<Satellite>> getSatellites() {
+        logger.info("GET request to endpoint '/satellites/'.");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.service.getSatellites());
@@ -96,6 +104,7 @@ public class Controller {
     @Operation(summary = "Home page", description = "Home page.")
     @GetMapping("")
     public ResponseEntity<HashMap<String, String>> home() {
+        logger.info("GET request to endpoint '/'.");
         HashMap<String, String> map = new HashMap<>();
         map.put("appName", "Springboot - API - Opertation Quasar Fire");
         map.put("swagger-ui",
