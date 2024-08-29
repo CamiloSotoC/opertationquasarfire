@@ -47,6 +47,12 @@ satellite.skywalkerY=-100
 satellite.satoX=500
 satellite.satoY=100
 ```
+### Security
+Access to the application requires Basic Authentication:
+```
+User: user
+Password: password
+```
 ## 💻 Executing program
 To run the application run the following command in the root of the project `mvn spring-boot:run`.
 
