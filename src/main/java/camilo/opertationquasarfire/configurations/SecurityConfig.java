@@ -37,6 +37,7 @@ public class SecurityConfig {
                     //csrf.disable();
                     csrf.ignoringRequestMatchers("/topsecret/");
                     csrf.ignoringRequestMatchers("/topsecret_split/*");
+                    csrf.ignoringRequestMatchers("/user");
                 })
                 .build();
 
