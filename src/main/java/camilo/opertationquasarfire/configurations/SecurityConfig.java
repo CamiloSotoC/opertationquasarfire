@@ -47,9 +47,10 @@ public class SecurityConfig {
         return ((request, response, authentication) -> response.sendRedirect(""));
     }*/
 
+    /*
     @Bean()
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
-    }
+    }*/
 
 }
