@@ -3,6 +3,7 @@ package camilo.opertationquasarfire.services;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import camilo.opertationquasarfire.entities.RoleEntity;
@@ -14,10 +15,12 @@ import camilo.opertationquasarfire.requests.CreateUserDTO;
 @Service
 public class UserService {
 
+    private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
 
-    UserService(UserRepository userRepository){
+    UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     public UserEntity createUser(CreateUserDTO user) {
 
@@ -27,7 +30,7 @@ public class UserService {
         
         UserEntity userEntity = UserEntity.builder()
         .username(user.getUsername())
-        .password(user.getPassword())
+        .password(passwordEncoder.encode(user.getPassword()))
         .email(user.getEmail())
         .roles(roles)
         .build();
